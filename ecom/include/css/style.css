@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+body{
+    background-color: gainsboro;
+}
+.container {
+    width: 40%;
+    height: 90vh;   
+    margin: auto;
+    margin-top: 2%;
+    background-color: #343a40;
+}
+
+.title {
+    padding: 30px 0;
+    background-color: ghostwhite;
+}
+
+.title h1 {
+    font-weight: 900;
+    color: #343a40;
+}
+
+.input_box {
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2% auto;
+}
+
+.input_box label {
+    width: 20%;
+    line-height: 30px;
+    color: white;
+    font-weight: 900;
+}
+
+.input_box input {
+    line-height: 30px;
+    width: 50%;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    font-weight: 900;
+    padding-left: 5%;
+}
+
+.input_box input::-webkit-input-placeholder {
+    color: #343a40;
+}
+
+.input_box .btn {
+    width: 40%;
+    margin: auto 1%;
+    line-height: 40px;
+    color: #343a40;
+    font-weight: 900;
+    font-size: 1.2em;
+    background-color: white;
+    cursor: pointer;
+    padding-left: 0;
+}

@@ -1,0 +1,45 @@
+.content{
+    min-height: 55vh !important;
+}
+.order{
+    width: 80%;
+    margin:1% auto;
+}
+.order h1{
+    padding: 1% 0;
+    color: #343a40;
+}
+.orderbox{
+    width: 100%;
+    min-height: fit-content;
+    background-color: #343a40;
+}
+
+table{
+    table-layout: fixed;
+    width: 100%;
+    padding: 1%;
+}
+
+thead tr th, tbody tr td{
+    background-color: #fbb710;
+    padding: 10px 0;
+    color: white;
+    text-align: center;
+}
+tbody tr td{
+    background-color: transparent;
+}
+tbody tr td{
+    border-bottom: 1px solid white;
+}
+tbody tr td a{
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding:10px 60px;
+    border-radius: 10px;
+}
+tbody tr td a:hover{
+    background-color: #fbb710;
+}

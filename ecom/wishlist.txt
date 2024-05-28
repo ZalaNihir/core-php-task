@@ -1,0 +1,112 @@
+It seems like there might be a typo in your question. If you meant "wishlist" instead of "whislist," I'll provide an example of how you can create a simple wishlist functionality using PHP with a procedural approach.
+
+Assuming you have a product catalog and want to allow users to add products to their wishlist, you can follow these steps:
+
+1. **Create a Database Table:**
+   First, you need a database table to store the wishlist items. For simplicity, let's assume you have a table named `wishlist` with columns `id`, `user_id`, and `product_id`.
+
+   ```sql
+   CREATE TABLE wishlist (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       user_id INT,
+       product_id INT,
+       UNIQUE KEY unique_wishlist (user_id, product_id)
+   );
+   ```
+
+2. **Create a PHP Script for Adding Products to Wishlist:**
+   Let's create a PHP script that handles adding a product to the wishlist. For simplicity, I'll assume you have a session variable for the user's ID.
+
+   ```php
+   <?php
+   session_start();
+
+   // Check if user is logged in
+   if (!isset($_SESSION['user_id'])) {
+       header('Location: login.php'); // Redirect to login page if not logged in
+       exit();
+   }
+
+   // Get user ID from session
+   $user_id = $_SESSION['user_id'];
+
+   // Get product ID from the request (assuming you use a form or AJAX)
+   $product_id = isset($_POST['product_id']) ? $_POST['product_id'] : null;
+
+   // Validate product ID
+   if ($product_id === null || !is_numeric($product_id)) {
+       echo 'Invalid product ID';
+       exit();
+   }
+
+   // Connect to the database (replace with your database credentials)
+   $conn = mysqli_connect('localhost', 'username', 'password', 'your_database');
+
+   // Check the connection
+   if (!$conn) {
+       die('Connection failed: ' . mysqli_connect_error());
+   }
+
+   // Insert into wishlist table
+   $sql = "INSERT INTO wishlist (user_id, product_id) VALUES ($user_id, $product_id)";
+
+   if (mysqli_query($conn, $sql)) {
+       echo 'Product added to wishlist successfully.';
+   } else {
+       echo 'Error adding product to wishlist: ' . mysqli_error($conn);
+   }
+
+   // Close the connection
+   mysqli_close($conn);
+   ?>
+   ```
+
+   This script assumes that you have a form or some mechanism to send the product ID to the server when the user clicks on the "Add to Wishlist" button.
+
+3. **Display Wishlist:**
+   You can create another script to display the user's wishlist. This script retrieves the wishlist items for the currently logged-in user.
+
+   ```php
+   <?php
+   session_start();
+
+   // Check if user is logged in
+   if (!isset($_SESSION['user_id'])) {
+       header('Location: login.php'); // Redirect to login page if not logged in
+       exit();
+   }
+
+   // Get user ID from session
+   $user_id = $_SESSION['user_id'];
+
+   // Connect to the database (replace with your database credentials)
+   $conn = mysqli_connect('localhost', 'username', 'password', 'your_database');
+
+   // Check the connection
+   if (!$conn) {
+       die('Connection failed: ' . mysqli_connect_error());
+   }
+
+   // Retrieve wishlist items for the user
+   $sql = "SELECT * FROM wishlist WHERE user_id = $user_id";
+   $result = mysqli_query($conn, $sql);
+
+   if (mysqli_num_rows($result) > 0) {
+       echo '<h2>Your Wishlist:</h2>';
+       echo '<ul>';
+       while ($row = mysqli_fetch_assoc($result)) {
+           echo '<li>Product ID: ' . $row['product_id'] . '</li>';
+       }
+       echo '</ul>';
+   } else {
+       echo 'Your wishlist is empty.';
+   }
+
+   // Close the connection
+   mysqli_close($conn);
+   ?>
+   ```
+
+   This script retrieves the products from the wishlist table for the currently logged-in user and displays them.
+
+Remember to replace the database connection details with your actual database credentials and adjust the code according to your application structure. This is a basic example, and in a real-world scenario, you might want to implement additional features like product details, removing items from the wishlist, etc.
